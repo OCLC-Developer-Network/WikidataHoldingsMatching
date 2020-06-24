@@ -1,0 +1,634 @@
+[
+  {
+    "op": "core/recon",
+    "engineConfig": {
+      "facets": [],
+      "mode": "record-based"
+    },
+    "columnName": "item",
+    "config": {
+      "mode": "standard-service",
+      "service": "https://tools.wmflabs.org/openrefine-wikidata/en/api",
+      "identifierSpace": "http://www.wikidata.org/entity/",
+      "schemaSpace": "http://www.wikidata.org/prop/direct/",
+      "type": {
+        "id": "Q5",
+        "name": "human"
+      },
+      "autoMatch": true,
+      "columnDetails": [],
+      "limit": 0
+    },
+    "description": "Reconcile cells in column item to type Q5"
+  },
+  {
+    "op": "core/extend-reconciled-data",
+    "engineConfig": {
+      "facets": [],
+      "mode": "record-based"
+    },
+    "baseColumnName": "item",
+    "endpoint": "https://tools.wmflabs.org/openrefine-wikidata/en/api",
+    "identifierSpace": "http://www.wikidata.org/entity/",
+    "schemaSpace": "http://www.wikidata.org/prop/direct/",
+    "extension": {
+      "properties": [
+        {
+          "id": "P214",
+          "name": null
+        }
+      ]
+    },
+    "columnInsertIndex": 9,
+    "description": "Extend data at index 9 based on column item"
+  },
+  {
+    "op": "core/column-addition",
+    "engineConfig": {
+      "facets": [],
+      "mode": "record-based"
+    },
+    "baseColumnName": "VIAF ID",
+    "expression": "grel:\"http://www.worldcat.org/identities/viaf-\"+value",
+    "onError": "set-to-blank",
+    "newColumnName": "WorldCat Identities (VIAF)",
+    "columnInsertIndex": 10,
+    "description": "Create column WorldCat Identities (VIAF) at index 10 based on column VIAF ID using expression grel:\"http://www.worldcat.org/identities/viaf-\"+value"
+  },
+  {
+    "op": "core/column-addition-by-fetching-urls",
+    "engineConfig": {
+      "facets": [],
+      "mode": "record-based"
+    },
+    "baseColumnName": "WorldCat Identities (VIAF)",
+    "urlExpression": "grel:value",
+    "onError": "set-to-blank",
+    "newColumnName": "HTML (VIAF)",
+    "columnInsertIndex": 11,
+    "delay": 5000,
+    "cacheResponses": true,
+    "httpHeadersJson": [
+      {
+        "name": "authorization",
+        "value": ""
+      },
+      {
+        "name": "user-agent",
+        "value": "OpenRefine 3.3-beta [c8eaaee]"
+      },
+      {
+        "name": "accept",
+        "value": "*/*"
+      }
+    ],
+    "description": "Create column HTML (VIAF) at index 11 by fetching URLs based on column WorldCat Identities (VIAF) using expression grel:value"
+  },
+  {
+    "op": "core/column-addition",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "list",
+          "name": "HTML (VIAF)",
+          "expression": "isBlank(value)",
+          "columnName": "HTML (VIAF)",
+          "invert": false,
+          "omitBlank": false,
+          "omitError": false,
+          "selection": [
+            {
+              "v": {
+                "v": false,
+                "l": "false"
+              }
+            }
+          ],
+          "selectBlank": false,
+          "selectError": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "baseColumnName": "WorldCat Identities (VIAF)",
+    "expression": "grel:value",
+    "onError": "set-to-blank",
+    "newColumnName": "WorldCat Identities URL",
+    "columnInsertIndex": 11,
+    "description": "Create column WorldCat Identities URL at index 11 based on column WorldCat Identities (VIAF) using expression grel:value"
+  },
+  {
+    "op": "core/extend-reconciled-data",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "list",
+          "name": "HTML (VIAF)",
+          "expression": "isBlank(value)",
+          "columnName": "HTML (VIAF)",
+          "invert": false,
+          "omitBlank": false,
+          "omitError": false,
+          "selection": [
+            {
+              "v": {
+                "v": true,
+                "l": "true"
+              }
+            }
+          ],
+          "selectBlank": false,
+          "selectError": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "baseColumnName": "item",
+    "endpoint": "https://tools.wmflabs.org/openrefine-wikidata/en/api",
+    "identifierSpace": "http://www.wikidata.org/entity/",
+    "schemaSpace": "http://www.wikidata.org/prop/direct/",
+    "extension": {
+      "properties": [
+        {
+          "id": "P244",
+          "name": null
+        }
+      ]
+    },
+    "columnInsertIndex": 9,
+    "description": "Extend data at index 9 based on column item"
+  },
+  {
+    "op": "core/column-addition",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "list",
+          "name": "HTML (VIAF)",
+          "expression": "isBlank(value)",
+          "columnName": "HTML (VIAF)",
+          "invert": false,
+          "omitBlank": false,
+          "omitError": false,
+          "selection": [
+            {
+              "v": {
+                "v": true,
+                "l": "true"
+              }
+            }
+          ],
+          "selectBlank": false,
+          "selectError": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "baseColumnName": "Library of Congress authority ID",
+    "expression": "grel:\"https://www.worldcat.org/identities/lccn-\"+value",
+    "onError": "set-to-blank",
+    "newColumnName": "WorldCat Identities (LCCN)",
+    "columnInsertIndex": 10,
+    "description": "Create column WorldCat Identities (LCCN) at index 10 based on column Library of Congress authority ID using expression grel:\"https://www.worldcat.org/identities/lccn-\"+value"
+  },
+  {
+    "op": "core/column-addition-by-fetching-urls",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "list",
+          "name": "HTML (VIAF)",
+          "expression": "isBlank(value)",
+          "columnName": "HTML (VIAF)",
+          "invert": false,
+          "omitBlank": false,
+          "omitError": false,
+          "selection": [
+            {
+              "v": {
+                "v": true,
+                "l": "true"
+              }
+            }
+          ],
+          "selectBlank": false,
+          "selectError": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "baseColumnName": "WorldCat Identities (LCCN)",
+    "urlExpression": "grel:value",
+    "onError": "set-to-blank",
+    "newColumnName": "HTML (LCCN)",
+    "columnInsertIndex": 11,
+    "delay": 5000,
+    "cacheResponses": true,
+    "httpHeadersJson": [
+      {
+        "name": "authorization",
+        "value": ""
+      },
+      {
+        "name": "user-agent",
+        "value": "OpenRefine 3.3-beta [c8eaaee]"
+      },
+      {
+        "name": "accept",
+        "value": "*/*"
+      }
+    ],
+    "description": "Create column HTML (LCCN) at index 11 by fetching URLs based on column WorldCat Identities (LCCN) using expression grel:value"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "list",
+          "name": "HTML (LCCN)",
+          "expression": "isBlank(value)",
+          "columnName": "HTML (LCCN)",
+          "invert": false,
+          "omitBlank": false,
+          "omitError": false,
+          "selection": [
+            {
+              "v": {
+                "v": false,
+                "l": "false"
+              }
+            }
+          ],
+          "selectBlank": false,
+          "selectError": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "WorldCat Identities URL",
+    "expression": "join ([coalesce(cells['WorldCat Identities URL'].value,''),coalesce(cells['WorldCat Identities (LCCN)'].value,'')],'')",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column WorldCat Identities URL using expression join ([coalesce(cells['WorldCat Identities URL'].value,''),coalesce(cells['WorldCat Identities (LCCN)'].value,'')],'')"
+  },
+  {
+    "op": "core/column-addition",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "baseColumnName": "HTML (VIAF)",
+    "expression": "join ([coalesce(cells['HTML (VIAF)'].value,''),coalesce(cells['HTML (LCCN)'].value,'')],'')",
+    "onError": "keep-original",
+    "newColumnName": "HTML (All)",
+    "columnInsertIndex": 16,
+    "description": "Create column HTML (All) at index 16 based on column HTML (VIAF) using expression join ([coalesce(cells['HTML (VIAF)'].value,''),coalesce(cells['HTML (LCCN)'].value,'')],'')"
+  },
+  {
+    "op": "core/column-removal",
+    "columnName": "HTML (VIAF)",
+    "description": "Remove column HTML (VIAF)"
+  },
+  {
+    "op": "core/column-removal",
+    "columnName": "HTML (LCCN)",
+    "description": "Remove column HTML (LCCN)"
+  },
+  {
+    "op": "core/column-addition",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "baseColumnName": "HTML (All)",
+    "expression": "grel:value.parseHtml().select(\"td\")[0].toString()value",
+    "onError": "set-to-blank",
+    "newColumnName": "Parse",
+    "columnInsertIndex": 15,
+    "description": "Create column Parse at index 15 based on column HTML (All) using expression grel:value.parseHtml().select(\"td\")[0].toString()value"
+  },
+  {
+    "op": "core/column-removal",
+    "columnName": "HTML (All)",
+    "description": "Remove column HTML (All)"
+  },
+  {
+    "op": "core/column-removal",
+    "columnName": "WorldCat Identities (VIAF)",
+    "description": "Remove column WorldCat Identities (VIAF)"
+  },
+  {
+    "op": "core/column-removal",
+    "columnName": "WorldCat Identities (LCCN)",
+    "description": "Remove column WorldCat Identities (LCCN)"
+  },
+  {
+    "op": "core/column-removal",
+    "columnName": "Library of Congress authority ID",
+    "description": "Remove column Library of Congress authority ID"
+  },
+  {
+    "op": "core/column-removal",
+    "columnName": "VIAF ID",
+    "description": "Remove column VIAF ID"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "list",
+          "name": "HTML (All)",
+          "expression": "isBlank(value)",
+          "columnName": "HTML (All)",
+          "invert": false,
+          "omitBlank": false,
+          "omitError": false,
+          "selection": [
+            {
+              "v": {
+                "v": false,
+                "l": "false"
+              }
+            }
+          ],
+          "selectBlank": false,
+          "selectError": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "Parse",
+    "expression": "value.replace(\"<td>\",\"\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Parse using expression value.replace(\"<td>\",\"\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "list",
+          "name": "HTML (All)",
+          "expression": "isBlank(value)",
+          "columnName": "HTML (All)",
+          "invert": false,
+          "omitBlank": false,
+          "omitError": false,
+          "selection": [
+            {
+              "v": {
+                "v": false,
+                "l": "false"
+              }
+            }
+          ],
+          "selectBlank": false,
+          "selectError": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "Parse",
+    "expression": "value.replace(\" works in \",\":\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Parse using expression value.replace(\" works in \",\":\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "list",
+          "name": "HTML (All)",
+          "expression": "isBlank(value)",
+          "columnName": "HTML (All)",
+          "invert": false,
+          "omitBlank": false,
+          "omitError": false,
+          "selection": [
+            {
+              "v": {
+                "v": false,
+                "l": "false"
+              }
+            }
+          ],
+          "selectBlank": false,
+          "selectError": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "Parse",
+    "expression": "value.replace(\" publications in \",\":\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Parse using expression value.replace(\" publications in \",\":\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "list",
+          "name": "HTML (All)",
+          "expression": "isBlank(value)",
+          "columnName": "HTML (All)",
+          "invert": false,
+          "omitBlank": false,
+          "omitError": false,
+          "selection": [
+            {
+              "v": {
+                "v": false,
+                "l": "false"
+              }
+            }
+          ],
+          "selectBlank": false,
+          "selectError": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "Parse",
+    "expression": "value.replace(\" languages and \",\":\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Parse using expression value.replace(\" languages and \",\":\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "list",
+          "name": "HTML (All)",
+          "expression": "isBlank(value)",
+          "columnName": "HTML (All)",
+          "invert": false,
+          "omitBlank": false,
+          "omitError": false,
+          "selection": [
+            {
+              "v": {
+                "v": false,
+                "l": "false"
+              }
+            }
+          ],
+          "selectBlank": false,
+          "selectError": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "Parse",
+    "expression": "value.replace(\" language and \",\":\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Parse using expression value.replace(\" language and \",\":\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "list",
+          "name": "HTML (All)",
+          "expression": "isBlank(value)",
+          "columnName": "HTML (All)",
+          "invert": false,
+          "omitBlank": false,
+          "omitError": false,
+          "selection": [
+            {
+              "v": {
+                "v": false,
+                "l": "false"
+              }
+            }
+          ],
+          "selectBlank": false,
+          "selectError": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "Parse",
+    "expression": "value.replace(\" library holdings </td>\",\"\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Parse using expression value.replace(\" library holdings </td>\",\"\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "list",
+          "name": "HTML (All)",
+          "expression": "isBlank(value)",
+          "columnName": "HTML (All)",
+          "invert": false,
+          "omitBlank": false,
+          "omitError": false,
+          "selection": [
+            {
+              "v": {
+                "v": false,
+                "l": "false"
+              }
+            }
+          ],
+          "selectBlank": false,
+          "selectError": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "Parse",
+    "expression": "value.replace(\",\",\"\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Parse using expression value.replace(\",\",\"\")"
+  },
+  {
+    "op": "core/column-split",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "list",
+          "name": "HTML (All)",
+          "expression": "isBlank(value)",
+          "columnName": "HTML (All)",
+          "invert": false,
+          "omitBlank": false,
+          "omitError": false,
+          "selection": [
+            {
+              "v": {
+                "v": false,
+                "l": "false"
+              }
+            }
+          ],
+          "selectBlank": false,
+          "selectError": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "Parse",
+    "guessCellType": true,
+    "removeOriginalColumn": true,
+    "mode": "separator",
+    "separator": ":",
+    "regex": false,
+    "maxColumns": 0,
+    "description": "Split column Parse by separator"
+  },
+  {
+    "op": "core/column-rename",
+    "oldColumnName": "Parse 4",
+    "newColumnName": "Library Holdings",
+    "description": "Rename column Parse 4 to Library Holdings"
+  },
+  {
+    "op": "core/column-removal",
+    "columnName": "Parse 3",
+    "description": "Remove column Parse 3"
+  },
+  {
+    "op": "core/column-removal",
+    "columnName": "Parse 2",
+    "description": "Remove column Parse 2"
+  },
+  {
+    "op": "core/column-removal",
+    "columnName": "Parse 1",
+    "description": "Remove column Parse 1"
+  },
+  {
+    "op": "core/recon-discard-judgments",
+    "engineConfig": {
+      "facets": [],
+      "mode": "record-based"
+    },
+    "columnName": "item",
+    "clearData": true,
+    "description": "Discard recon judgments and clear recon data for cells in column item"
+  }
+]
