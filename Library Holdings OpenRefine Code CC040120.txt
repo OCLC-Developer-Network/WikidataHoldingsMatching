@@ -8,7 +8,7 @@
     "columnName": "item",
     "config": {
       "mode": "standard-service",
-      "service": "https://tools.wmflabs.org/openrefine-wikidata/en/api",
+      "service": "https://wdreconcile.toolforge.org/en/api",
       "identifierSpace": "http://www.wikidata.org/entity/",
       "schemaSpace": "http://www.wikidata.org/prop/direct/",
       "type": {
@@ -28,7 +28,7 @@
       "mode": "record-based"
     },
     "baseColumnName": "item",
-    "endpoint": "https://tools.wmflabs.org/openrefine-wikidata/en/api",
+    "endpoint": "https://wdreconcile.toolforge.org/en/api",
     "identifierSpace": "http://www.wikidata.org/entity/",
     "schemaSpace": "http://www.wikidata.org/prop/direct/",
     "extension": {
@@ -144,7 +144,7 @@
       "mode": "row-based"
     },
     "baseColumnName": "item",
-    "endpoint": "https://tools.wmflabs.org/openrefine-wikidata/en/api",
+    "endpoint": "https://wdreconcile.toolforge.org/en/api",
     "identifierSpace": "http://www.wikidata.org/entity/",
     "schemaSpace": "http://www.wikidata.org/prop/direct/",
     "extension": {
